@@ -1,13 +1,12 @@
-const express = require('express');
-const { Sequelize } = require('sequelize');
-const routes = require('./config/routes/Routes');
-const mapRoutes = require('express-routes-mapper');
+require("dotenv").config();
+const express = require("express");
+const { Sequelize } = require("sequelize");
+const routes = require("./config/routes/Routes");
+const mapRoutes = require("express-routes-mapper");
 
+const config = require("./config");
 
-const config = require('./config');
-
-const mappedRoutes = mapRoutes(config.routes, 'controllers/');
-
+const mappedRoutes = mapRoutes(config.routes, "controllers/");
 
 const app = express();
 
@@ -35,17 +34,18 @@ const app = express();
 //       }
 //   }
 //   testing();
-app.use(express.urlencoded({
-    extended: false
-}));
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 
+app.get("/", (req, res) => res.send("hello"));
 
-app.get('/', (req, res) => res.send("hello"));
+app.use("/api", mappedRoutes);
 
-app.use('/api', mappedRoutes);
-
-const port = 3306;
+const port = process.env.HOST_PORT;
 
 app.listen(port, () => {
-    console.log(`App listening on port ! ${port}`);
+  console.log(`App listening on port ! ${port}`);
 });

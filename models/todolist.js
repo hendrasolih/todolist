@@ -22,31 +22,34 @@
 //   return todolist;
 // };
 
-const Sequelize = require('sequelize');
-const sequelize = require('../config/database');
+const Sequelize = require("sequelize");
+const sequelize = require("../config/database");
 
-
-const todolist = sequelize.define('todolists', {
-  id: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: Sequelize.UUIDV4,
-    primaryKey: true,
-    unique: true,
+const todolist = sequelize.define(
+  "todolists",
+  {
+    id: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: Sequelize.UUIDV4,
+      primaryKey: true,
+      unique: true,
+    },
+    to_do: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+    },
   },
-  to_do: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  createdAt: {
-    type: Sequelize.DATE,
-  },
-  updatedAt: {
-    type: Sequelize.DATE,
-  },
-}, {
-  underscored: true,
-  freezeTableName: true,
-});
+  {
+    underscored: true,
+    freezeTableName: true,
+  }
+);
 
 module.exports = todolist;
